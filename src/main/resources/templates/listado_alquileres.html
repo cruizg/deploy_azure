@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Alquileres - Blockbuster Fake</title>
+    <style>
+        body {
+            margin:0; padding:0;
+            font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+            background: #23235b;
+            color: #fff;
+            font-size: 1.15em;
+        }
+        .main-content {
+            margin-left:260px;
+            padding: 40px 20px 20px 20px;
+            min-height: 100vh;
+        }
+        .busqueda-form-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+        .busqueda-form input[type="text"] {
+            padding:8px;
+            border-radius:6px;
+            border:1px solid #ccc;
+            width:250px;
+            font-size:1em;
+        }
+        .busqueda-form button {
+            padding:8px 16px;
+            border-radius:6px;
+            border:none;
+            background:#23235b;
+            color:#fff;
+            font-weight:bold;
+            cursor:pointer;
+            font-size:1em;
+            margin-left: 8px;
+        }
+        .busqueda-form button:hover {
+            background: #fff;
+            color: #23235b;
+        }
+        .alquileres-table {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #1a1a40;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 0 20px #000;
+        }
+        .alquileres-table th, .alquileres-table td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+        .alquileres-table th {
+            background: #23235b;
+            color: #fff;
+            font-size: 1.1em;
+        }
+        .alquileres-table tr:nth-child(even) {
+            background: #23235b;
+        }
+        .alquileres-table tr:nth-child(odd) {
+            background: #1a1a40;
+        }
+        .alquileres-table td {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="~{sidebar :: sidebar}"></div>
+    <div class="main-content">
+        <div class="busqueda-form-container">
+            <form th:action="@{/alquileres/listado}" method="get" class="busqueda-form">
+                <input type="text" id="filtro" name="filtro" placeholder="Buscar cliente, película o estado" th:value="${param.filtro}" />
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <div th:if="${mensajeExito}" style="color:green; font-weight:bold; margin-bottom:10px;" th:text="${mensajeExito}"></div>
+        <div th:if="${mensajeError}" style="color:red; font-weight:bold; margin-bottom:10px;" th:text="${mensajeError}"></div>
+
+        <table class="alquileres-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Película</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="detalle : ${detalles}">
+                    <td th:text="${detalle.alquiler.id_alquiler}">1</td>
+                    <td th:text="${detalle.alquiler.cliente.nombre}">Juan Pérez</td>
+                    <td th:text="${detalle.alquiler.fecha}">2025-06-01</td>
+                    <td th:text="${detalle.pelicula.titulo}">Matrix</td>
+                    <td th:text="${detalle.cantidad}">2</td>
+                    <td th:text="${detalle.alquiler.total}">30.00</td>
+                    <td th:text="${detalle.alquiler.estado}">Activo</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

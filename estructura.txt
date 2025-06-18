@@ -1,0 +1,142 @@
+Listado de rutas de carpetas para el volumen Windows-SSD
+El n£mero de serie del volumen es A260-2E3D
+C:.
+³   .gitattributes
+³   .gitignore
+³   estructura.txt
+³   HELP.md
+³   mvnw
+³   mvnw.cmd
+³   pom.xml
+³   README.md
+³   
+ÃÄÄÄ.mvn
+³   ÀÄÄÄwrapper
+³           maven-wrapper.properties
+³           
+ÃÄÄÄ.vscode
+³       launch.json
+³       
+ÃÄÄÄsrc
+³   ÃÄÄÄmain
+³   ³   ÃÄÄÄjava
+³   ³   ³   ÀÄÄÄcom
+³   ³   ³       ÀÄÄÄcibertec
+³   ³   ³           ÀÄÄÄevaluacionT2_LP2
+³   ³   ³               ³   BaseDeDatos.java
+³   ³   ³               ³   EvaluacionT2Lp2Application.java
+³   ³   ³               ³   
+³   ³   ³               ÃÄÄÄcontroller
+³   ³   ³               ³       AlquileresController.java
+³   ³   ³               ³       ClientesController.java
+³   ³   ³               ³       Detalle_alquilerController.java
+³   ³   ³               ³       DevolucionController.java
+³   ³   ³               ³       HomeController.java
+³   ³   ³               ³       PeliculasController.java
+³   ³   ³               ³       
+³   ³   ³               ÃÄÄÄentity
+³   ³   ³               ³       Alquileres.java
+³   ³   ³               ³       Clientes.java
+³   ³   ³               ³       Detalle_alquiler.java
+³   ³   ³               ³       Peliculas.java
+³   ³   ³               ³       
+³   ³   ³               ÀÄÄÄrepository
+³   ³   ³                       AlquileresRepository.java
+³   ³   ³                       ClientesRepository.java
+³   ³   ³                       Detalle_alquilerRepository.java
+³   ³   ³                       PeliculasRepository.java
+³   ³   ³                       
+³   ³   ÀÄÄÄresources
+³   ³       ³   application.properties
+³   ³       ³   
+³   ³       ÃÄÄÄstatic
+³   ³       ³       movietime.jpg
+³   ³       ³       
+³   ³       ÀÄÄÄtemplates
+³   ³               clientes.html
+³   ³               devolucion.html
+³   ³               inicio.html
+³   ³               listado_alquileres.html
+³   ³               peliculas.html
+³   ³               registrar_alquiler.html
+³   ³               sidebar.html
+³   ³               
+³   ÀÄÄÄtest
+³       ÀÄÄÄjava
+³           ÀÄÄÄcom
+³               ÀÄÄÄcibertec
+³                   ÀÄÄÄevaluacionT2_LP2
+³                           EvaluacionT2Lp2ApplicationTests.java
+³                           
+ÀÄÄÄtarget
+    ÃÄÄÄclasses
+    ³   ³   application.properties
+    ³   ³   
+    ³   ÃÄÄÄcom
+    ³   ³   ÀÄÄÄcibertec
+    ³   ³       ÀÄÄÄevaluacionT2_LP2
+    ³   ³           ³   BaseDeDatos.class
+    ³   ³           ³   EvaluacionT2Lp2Application.class
+    ³   ³           ³   
+    ³   ³           ÃÄÄÄcontroller
+    ³   ³           ³       AlquileresController$AlquilerForm.class
+    ³   ³           ³       AlquileresController.class
+    ³   ³           ³       ClientesController.class
+    ³   ³           ³       Detalle_alquilerController.class
+    ³   ³           ³       DevolucionController$DevolucionForm.class
+    ³   ³           ³       DevolucionController.class
+    ³   ³           ³       HomeController.class
+    ³   ³           ³       PeliculasController.class
+    ³   ³           ³       
+    ³   ³           ÃÄÄÄentity
+    ³   ³           ³       Alquileres$EstadoAlquiler.class
+    ³   ³           ³       Alquileres.class
+    ³   ³           ³       Clientes.class
+    ³   ³           ³       Detalle_alquiler$DetalleAlquilerId.class
+    ³   ³           ³       Detalle_alquiler.class
+    ³   ³           ³       Peliculas.class
+    ³   ³           ³       
+    ³   ³           ÀÄÄÄrepository
+    ³   ³                   AlquileresRepository.class
+    ³   ³                   ClientesRepository.class
+    ³   ³                   Detalle_alquilerRepository.class
+    ³   ³                   PeliculasRepository.class
+    ³   ³                   
+    ³   ÃÄÄÄstatic
+    ³   ³       movietime.jpg
+    ³   ³       
+    ³   ÀÄÄÄtemplates
+    ³           clientes.html
+    ³           devolucion.html
+    ³           inicio.html
+    ³           listado_alquileres.html
+    ³           peliculas.html
+    ³           registrar_alquiler.html
+    ³           sidebar.html
+    ³           
+    ÃÄÄÄgenerated-sources
+    ³   ÀÄÄÄannotations
+    ÃÄÄÄgenerated-test-sources
+    ³   ÀÄÄÄtest-annotations
+    ÃÄÄÄmaven-status
+    ³   ÀÄÄÄmaven-compiler-plugin
+    ³       ÃÄÄÄcompile
+    ³       ³   ÀÄÄÄdefault-compile
+    ³       ³           createdFiles.lst
+    ³       ³           inputFiles.lst
+    ³       ³           
+    ³       ÀÄÄÄtestCompile
+    ³           ÀÄÄÄdefault-testCompile
+    ³                   createdFiles.lst
+    ³                   inputFiles.lst
+    ³                   
+    ÃÄÄÄsurefire-reports
+    ³       2025-06-17T19-09-24_548-jvmRun1.dump
+    ³       2025-06-17T19-09-24_548-jvmRun1.dumpstream
+    ³       
+    ÀÄÄÄtest-classes
+        ÀÄÄÄcom
+            ÀÄÄÄcibertec
+                ÀÄÄÄevaluacionT2_LP2
+                        EvaluacionT2Lp2ApplicationTests.class
+                        

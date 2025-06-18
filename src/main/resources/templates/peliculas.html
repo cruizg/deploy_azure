@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Películas - Blockbuster Fake</title>
+    <style>
+        body {
+            margin:0; padding:0;
+            font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+            background: #23235b;
+            color: #fff;
+            font-size: 1.15em;
+        }
+        .main-content {
+            margin-left:260px;
+            padding: 40px 20px 20px 20px;
+            min-height: 100vh;
+        }
+        .form-section {
+            background: #1a1a40;
+            padding: 30px 30px 20px 30px;
+            border-radius: 18px;
+            box-shadow: 0 0 20px #000;
+            max-width: 650px;
+            margin: 0 auto 30px auto;
+        }
+        .form-section label {
+            font-weight: bold;
+            color: #fff;
+        }
+        .form-section input[type="text"], .form-section input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 18px 0;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            background: #23235b;
+            color: #fff;
+            font-size: 1.1em;
+        }
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .button-group button {
+            background: #23235b;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 1em;
+            font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .button-group button:disabled {
+            background: #44447a;
+            color: #bbb;
+            border: 2px solid #bbb;
+            cursor: not-allowed;
+        }
+        .button-group button:hover:enabled {
+            background: #fff;
+            color: #23235b;
+        }
+        .peliculas-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #1a1a40;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 0 20px #000;
+        }
+        .peliculas-table th, .peliculas-table td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+        .peliculas-table th {
+            background: #23235b;
+            color: #fff;
+            font-size: 1.1em;
+        }
+        .peliculas-table tr:nth-child(even) {
+            background: #23235b;
+        }
+        .peliculas-table tr:nth-child(odd) {
+            background: #1a1a40;
+        }
+        .peliculas-table td {
+            color: #fff;
+        }
+        .btn-seleccionar {
+            background: #fff;
+            color: #23235b;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+            font-size: 1em;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-seleccionar:hover {
+            background: #e0e0e0;
+            color: #1a1a40;
+        }
+        .busqueda-form-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        .busqueda-form input[type="text"] {
+            padding:8px;
+            border-radius:6px;
+            border:1px solid #ccc;
+            width:250px;
+            font-size:1em;
+        }
+        .busqueda-form button {
+            padding:8px 16px;
+            border-radius:6px;
+            border:none;
+            background:#23235b;
+            color:#fff;
+            font-weight:bold;
+            cursor:pointer;
+            font-size:1em;
+            margin-left: 8px;
+        }
+        .busqueda-form button:hover {
+            background: #fff;
+            color: #23235b;
+        }
+    </style>
+    <script>
+        let modo = 'agregar'; // agregar, seleccionado, editar
+
+        function setModo(nuevoModo) {
+            modo = nuevoModo;
+            actualizarBotones();
+
+            // Habilita o deshabilita los campos según el modo
+            const titulo = document.getElementById('titulo');
+            const genero = document.getElementById('genero');
+            const stock = document.getElementById('stock');
+            const precio = document.getElementById('precio');
+            if (modo === 'editar' || modo === 'agregar') {
+                titulo.removeAttribute('readonly');
+                genero.removeAttribute('readonly');
+                stock.removeAttribute('readonly');
+                precio.removeAttribute('readonly');
+            } else {
+                titulo.setAttribute('readonly', true);
+                genero.setAttribute('readonly', true);
+                stock.setAttribute('readonly', true);
+                precio.setAttribute('readonly', true);
+            }
+        }
+
+        function actualizarBotones() {
+            document.getElementById('btnAgregar').disabled = (modo !== 'agregar');
+            document.getElementById('btnEditar').disabled = (modo !== 'seleccionado');
+            document.getElementById('btnEliminar').disabled = (modo !== 'seleccionado');
+            document.getElementById('btnGuardar').disabled = (modo !== 'editar');
+            document.getElementById('btnCancelar').disabled = (modo === 'agregar');
+        }
+
+        function seleccionarPelicula(row) {
+            document.getElementById('id_pelicula').value = row.getAttribute('data-idpelicula');
+            document.getElementById('titulo').value = row.getAttribute('data-titulo');
+            document.getElementById('genero').value = row.getAttribute('data-genero');
+            document.getElementById('stock').value = row.getAttribute('data-stock');
+            document.getElementById('precio').value = row.getAttribute('data-precio');
+            setModo('seleccionado');
+        }
+
+        function editarPelicula() {
+            setModo('editar');
+        }
+
+        function cancelarAccion(e) {
+            if (e) e.preventDefault();
+            document.getElementById('id_pelicula').value = '';
+            document.getElementById('titulo').value = '';
+            document.getElementById('genero').value = '';
+            document.getElementById('stock').value = '';
+            document.getElementById('precio').value = '';
+            setModo('agregar');
+        }
+
+        window.onload = function() {
+            setModo(document.getElementById('id_pelicula').value ? 'seleccionado' : 'agregar');
+        }
+    </script>
+</head>
+<body>
+    <div th:replace="~{sidebar :: sidebar}"></div>
+    <div class="main-content">
+        <div class="busqueda-form-container">
+            <form th:action="@{/peliculas}" method="get" class="busqueda-form">
+                <input type="text" id="filtro" name="filtro" placeholder="Por título o género" th:value="${param.filtro}" />
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <div class="form-section">
+            <!-- Mensajes de éxito y error -->
+            <div th:if="${mensajeExito}" style="color:green; font-weight:bold; margin-bottom:10px;" th:text="${mensajeExito}"></div>
+            <div th:if="${mensajeError}" style="color:red; font-weight:bold; margin-bottom:10px;" th:text="${mensajeError}"></div>
+            <form th:action="@{/peliculas/guardar}" th:object="${pelicula}" method="post" id="formPelicula">
+                <input type="hidden" th:field="*{id_pelicula}" id="id_pelicula"/>
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" th:field="*{titulo}" placeholder="Título" required readonly />
+
+                <label for="genero">Género:</label>
+                <input type="text" id="genero" th:field="*{genero}" placeholder="Género" required readonly />
+
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" th:field="*{stock}" placeholder="Stock" min="0" required readonly />
+
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" th:field="*{precio}" placeholder="Precio" min="0" step="0.01" required readonly />
+
+                <div class="button-group">
+                    <button type="submit" id="btnAgregar" name="accion" value="agregar">Agregar</button>
+                    <button type="submit" id="btnEliminar" name="accion" value="eliminar">Eliminar</button>
+                    <button type="button" id="btnEditar" onclick="editarPelicula()">Editar</button>
+                    <button type="submit" id="btnGuardar" name="accion" value="guardar">Guardar</button>
+                    <button type="button" id="btnCancelar" onclick="cancelarAccion(event)">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <table class="peliculas-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Género</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${peliculas}"
+                    th:attr="data-idpelicula=${p.id_pelicula},data-titulo=${p.titulo},data-genero=${p.genero},data-stock=${p.stock},data-precio=${p.precio}"
+                    onclick="seleccionarPelicula(this)"
+                    style="cursor:pointer;">
+                    <td th:text="${p.id_pelicula}">1</td>
+                    <td th:text="${p.titulo}">Matrix</td>
+                    <td th:text="${p.genero}">Acción</td>
+                    <td th:text="${p.stock}">10</td>
+                    <td th:text="${p.precio}">15.00</td>
+                    <td>
+                        <button type="button"
+                            class="btn-seleccionar"
+                            onclick="seleccionarPelicula(this.parentElement.parentElement); event.stopPropagation();">
+                            Seleccionar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
