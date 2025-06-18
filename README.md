@@ -1,4 +1,3 @@
-ECHO est� activado.
 # Blockbuster Fake - Sistema de Alquiler de Películas
 
 Proyecto de ejemplo para la gestión de alquileres y devoluciones de películas, desarrollado con **Spring Boot**, **Thymeleaf** y **MySQL**.
