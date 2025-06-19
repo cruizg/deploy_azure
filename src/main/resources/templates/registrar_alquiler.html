@@ -2,40 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Alquiler - Blockbuster Fake</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body {
             margin:0; padding:0;
-            font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
-            background: #23235b;
-            color: #fff;
-            font-size: 1.15em;
-        }
-        .main-content {
-            margin-left:260px;
-            padding: 40px 20px 20px 20px;
-            min-height: 100vh;
-        }
-        .form-section {
-            background: #1a1a40;
-            padding: 30px 30px 20px 30px;
-            border-radius: 18px;
-            box-shadow: 0 0 20px #000;
-            max-width: 500px;
-            margin: 0 auto 30px auto;
-        }
-        .form-section label {
-            font-weight: bold;
-            color: #fff;
-        }
-        .form-section select, .form-section input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0 18px 0;
-            border: 2px solid #fff;
-            border-radius: 8px;
-            background: #23235b;
+            font-family:'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #23235b 60%, #3a3a7a 100%);
             color: #fff;
             font-size: 1.1em;
+        }
+        .main-content {
+            margin-left:300px;
+            padding: 40px 20px 20px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-section {
+            background: rgba(26,26,64,0.98);
+            padding: 36px 36px 28px 36px;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            border: 1.5px solid #3a3a7a;
+        }
+        .form-section h2 {
+            text-align:center;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            color: #ffe082;
+            text-shadow: 1px 1px 8px #000;
+        }
+        .form-section label {
+            font-weight: 600;
+            color: #ffe082;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .form-section select, .form-section input[type="number"], .form-section input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 22px 0;
+            border: 2px solid #ffe082;
+            border-radius: 10px;
+            background: #23235b;
+            color: #fff;
+            font-size: 1.08em;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .form-section select:focus, .form-section input[type="number"]:focus, .form-section input[type="text"]:focus {
+            border: 2px solid #fff9c4;
+            background: #2d2d6a;
         }
         .form-section input[readonly] {
             background: #44447a;
@@ -51,27 +71,53 @@
         }
         .button-group {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             margin-bottom: 20px;
             justify-content: center;
         }
         .button-group button, .button-group a.btn {
-            background: #23235b;
-            color: #fff;
-            border: 2px solid #fff;
+            background: linear-gradient(90deg, #ffe082 60%, #fff9c4 100%);
+            color: #23235b;
+            border: none;
             border-radius: 8px;
-            padding: 10px 18px;
-            font-size: 1em;
-            font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+            padding: 12px 22px;
+            font-size: 1.08em;
+            font-family:'Segoe UI', Arial, sans-serif;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
             text-decoration: none;
-            display: inline-block;
+            box-shadow: 0 2px 8px #00000033;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .button-group button:hover:enabled, .button-group a.btn:hover {
-            background: #fff;
-            color: #23235b;
+            background: linear-gradient(90deg, #fff9c4 60%, #ffe082 100%);
+            color: #1a1a40;
+            box-shadow: 0 4px 16px #00000044;
+        }
+        .message-success {
+            color: #00e676;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .message-error {
+            color: #ff5252;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .form-section label i {
+            margin-right: 6px;
+            color: #fff9c4;
+        }
+        #mensajeStock {
+            color: #ffe082;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
         }
     </style>
     <script>
@@ -101,11 +147,11 @@
     <div th:replace="~{sidebar :: sidebar}"></div>
     <div class="main-content">
         <div class="form-section">
-            <h2 style="text-align:center;">Registrar Alquiler</h2>
-            <div th:if="${mensajeExito}" style="color:green; font-weight:bold; margin-bottom:10px;" th:text="${mensajeExito}"></div>
-            <div th:if="${mensajeError}" style="color:red; font-weight:bold; margin-bottom:10px;" th:text="${mensajeError}"></div>
+            <h2><i class="fa-solid fa-cart-plus"></i> Registrar Alquiler</h2>
+            <div th:if="${mensajeExito}" class="message-success" th:text="${mensajeExito}"></div>
+            <div th:if="${mensajeError}" class="message-error" th:text="${mensajeError}"></div>
             <form th:action="@{/alquileres/registrar}" method="post" th:object="${alquilerForm}">
-                <label for="cliente">Cliente:</label>
+                <label for="cliente"><i class="fa-solid fa-user"></i> Cliente:</label>
                 <select id="cliente" th:field="*{clienteId}" required>
                     <option value="" disabled 
                         th:selected="*{clienteId} == null or *{clienteId} == ''">
@@ -114,7 +160,7 @@
                     <option th:each="c : ${clientes}" th:value="${c.id_cliente}" th:text="${c.nombre}"></option>
                 </select>
 
-                <label for="pelicula">Película:</label>
+                <label for="pelicula"><i class="fa-solid fa-film"></i> Película:</label>
                 <select id="pelicula" th:field="*{peliculaId}" required>
                     <option value="" disabled 
                         th:selected="*{peliculaId} == null or *{peliculaId} == ''">
@@ -127,17 +173,17 @@
                     </option>
                 </select>
 
-                <label for="cantidad">Cantidad:</label>
+                <label for="cantidad"><i class="fa-solid fa-arrow-up-1-9"></i> Cantidad:</label>
                 <input type="number" id="cantidad" th:field="*{cantidad}" min="1" required />
 
-                <label for="total">Total (S/):</label>
+                <label for="total"><i class="fa-solid fa-money-bill-wave"></i> Total (S/):</label>
                 <input type="text" id="total" readonly value="0.00" />
 
-                <div id="mensajeStock" style="color:yellow; font-weight:bold; margin-bottom:10px;"></div>
+                <div id="mensajeStock"></div>
 
                 <div class="button-group">
-                    <button type="submit" name="accion" value="procesar">Procesar</button>
-                    <a href="/alquileres/listado" class="btn">Listado de Alquileres</a>
+                    <button type="submit" name="accion" value="procesar"><i class="fa-solid fa-check"></i> Procesar</button>
+                    <a href="/alquileres/listado" class="btn"><i class="fa-solid fa-list"></i> Listado de Alquileres</a>
                 </div>
             </form>
         </div>

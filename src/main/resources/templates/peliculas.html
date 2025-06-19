@@ -2,87 +2,141 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Películas - Blockbuster Fake</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body {
             margin:0; padding:0;
-            font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
-            background: #23235b;
-            color: #fff;
-            font-size: 1.15em;
-        }
-        .main-content {
-            margin-left:260px;
-            padding: 40px 20px 20px 20px;
-            min-height: 100vh;
-        }
-        .form-section {
-            background: #1a1a40;
-            padding: 30px 30px 20px 30px;
-            border-radius: 18px;
-            box-shadow: 0 0 20px #000;
-            max-width: 650px;
-            margin: 0 auto 30px auto;
-        }
-        .form-section label {
-            font-weight: bold;
-            color: #fff;
-        }
-        .form-section input[type="text"], .form-section input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0 18px 0;
-            border: 2px solid #fff;
-            border-radius: 8px;
-            background: #23235b;
+            font-family:'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #23235b 60%, #3a3a7a 100%);
             color: #fff;
             font-size: 1.1em;
         }
+        .main-content {
+            margin-left:300px;
+            padding: 40px 20px 20px 20px;
+            min-height: 100vh;
+        }
+        .busqueda-form-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 24px;
+        }
+        .busqueda-form input[type="text"] {
+            padding:10px;
+            border-radius:8px;
+            border:1.5px solid #ffe082;
+            width:260px;
+            font-size:1em;
+            background: #23235b;
+            color: #fff;
+            transition: border 0.2s;
+        }
+        .busqueda-form input[type="text"]:focus {
+            border:1.5px solid #fff9c4;
+            outline: none;
+        }
+        .busqueda-form button {
+            padding:10px 20px;
+            border-radius:8px;
+            border:none;
+            background: linear-gradient(90deg, #ffe082 60%, #fff9c4 100%);
+            color: #23235b;
+            font-weight:bold;
+            cursor:pointer;
+            font-size:1em;
+            margin-left: 10px;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #00000033;
+        }
+        .busqueda-form button:hover {
+            background: linear-gradient(90deg, #fff9c4 60%, #ffe082 100%);
+            color: #1a1a40;
+            box-shadow: 0 4px 16px #00000044;
+        }
+        .form-section {
+            background: rgba(26,26,64,0.98);
+            padding: 36px 36px 28px 36px;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            border: 1.5px solid #3a3a7a;
+        }
+        .form-section label {
+            font-weight: 600;
+            color: #ffe082;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .form-section input[type="text"], .form-section input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 22px 0;
+            border: 2px solid #ffe082;
+            border-radius: 10px;
+            background: #23235b;
+            color: #fff;
+            font-size: 1.08em;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .form-section input[type="text"]:focus, .form-section input[type="number"]:focus {
+            border: 2px solid #fff9c4;
+            background: #2d2d6a;
+        }
         .button-group {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             margin-bottom: 20px;
             justify-content: center;
         }
         .button-group button {
-            background: #23235b;
-            color: #fff;
-            border: 2px solid #fff;
+            background: linear-gradient(90deg, #ffe082 60%, #fff9c4 100%);
+            color: #23235b;
+            border: none;
             border-radius: 8px;
-            padding: 10px 18px;
-            font-size: 1em;
-            font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+            padding: 12px 22px;
+            font-size: 1.08em;
+            font-family:'Segoe UI', Arial, sans-serif;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .button-group button:disabled {
             background: #44447a;
             color: #bbb;
-            border: 2px solid #bbb;
+            border: none;
             cursor: not-allowed;
         }
         .button-group button:hover:enabled {
-            background: #fff;
-            color: #23235b;
+            background: linear-gradient(90deg, #fff9c4 60%, #ffe082 100%);
+            color: #1a1a40;
+            box-shadow: 0 4px 16px #00000044;
         }
         .peliculas-table {
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
-            border-collapse: collapse;
-            background: #1a1a40;
-            border-radius: 18px;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(26,26,64,0.98);
+            border-radius: 22px;
             overflow: hidden;
-            box-shadow: 0 0 20px #000;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
         }
         .peliculas-table th, .peliculas-table td {
-            padding: 14px 18px;
+            padding: 16px 20px;
             text-align: left;
         }
         .peliculas-table th {
             background: #23235b;
-            color: #fff;
-            font-size: 1.1em;
+            color: #ffe082;
+            font-size: 1.12em;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #ffe082;
         }
         .peliculas-table tr:nth-child(even) {
             background: #23235b;
@@ -92,50 +146,48 @@
         }
         .peliculas-table td {
             color: #fff;
+            border-bottom: 1px solid #3a3a7a;
+        }
+        .peliculas-table tr:last-child td {
+            border-bottom: none;
+        }
+        .peliculas-table tbody tr:hover {
+            background: #2d2d6a;
+            transition: background 0.2s;
         }
         .btn-seleccionar {
-            background: #fff;
+            background: linear-gradient(90deg, #ffe082 60%, #fff9c4 100%);
             color: #23235b;
             border: none;
             border-radius: 6px;
-            padding: 6px 14px;
+            padding: 8px 18px;
             font-weight: bold;
             cursor: pointer;
-            font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+            font-family:'Segoe UI', Arial, sans-serif;
             font-size: 1em;
             text-decoration: none;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px #00000033;
         }
         .btn-seleccionar:hover {
-            background: #e0e0e0;
+            background: linear-gradient(90deg, #fff9c4 60%, #ffe082 100%);
             color: #1a1a40;
+            box-shadow: 0 4px 16px #00000044;
         }
-        .busqueda-form-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 20px;
+        .message-success {
+            color: #00e676;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
         }
-        .busqueda-form input[type="text"] {
-            padding:8px;
-            border-radius:6px;
-            border:1px solid #ccc;
-            width:250px;
-            font-size:1em;
-        }
-        .busqueda-form button {
-            padding:8px 16px;
-            border-radius:6px;
-            border:none;
-            background:#23235b;
-            color:#fff;
-            font-weight:bold;
-            cursor:pointer;
-            font-size:1em;
-            margin-left: 8px;
-        }
-        .busqueda-form button:hover {
-            background: #fff;
-            color: #23235b;
+        .message-error {
+            color: #ff5252;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
         }
     </style>
     <script>
@@ -205,34 +257,33 @@
         <div class="busqueda-form-container">
             <form th:action="@{/peliculas}" method="get" class="busqueda-form">
                 <input type="text" id="filtro" name="filtro" placeholder="Por título o género" th:value="${param.filtro}" />
-                <button type="submit">Buscar</button>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
             </form>
         </div>
 
         <div class="form-section">
-            <!-- Mensajes de éxito y error -->
-            <div th:if="${mensajeExito}" style="color:green; font-weight:bold; margin-bottom:10px;" th:text="${mensajeExito}"></div>
-            <div th:if="${mensajeError}" style="color:red; font-weight:bold; margin-bottom:10px;" th:text="${mensajeError}"></div>
+            <div th:if="${mensajeExito}" class="message-success" th:text="${mensajeExito}"></div>
+            <div th:if="${mensajeError}" class="message-error" th:text="${mensajeError}"></div>
             <form th:action="@{/peliculas/guardar}" th:object="${pelicula}" method="post" id="formPelicula">
                 <input type="hidden" th:field="*{id_pelicula}" id="id_pelicula"/>
-                <label for="titulo">Título:</label>
+                <label for="titulo"><i class="fa-solid fa-film"></i> Título:</label>
                 <input type="text" id="titulo" th:field="*{titulo}" placeholder="Título" required readonly />
 
-                <label for="genero">Género:</label>
+                <label for="genero"><i class="fa-solid fa-tags"></i> Género:</label>
                 <input type="text" id="genero" th:field="*{genero}" placeholder="Género" required readonly />
 
-                <label for="stock">Stock:</label>
+                <label for="stock"><i class="fa-solid fa-boxes-stacked"></i> Stock:</label>
                 <input type="number" id="stock" th:field="*{stock}" placeholder="Stock" min="0" required readonly />
 
-                <label for="precio">Precio:</label>
+                <label for="precio"><i class="fa-solid fa-money-bill-wave"></i> Precio:</label>
                 <input type="number" id="precio" th:field="*{precio}" placeholder="Precio" min="0" step="0.01" required readonly />
 
                 <div class="button-group">
-                    <button type="submit" id="btnAgregar" name="accion" value="agregar">Agregar</button>
-                    <button type="submit" id="btnEliminar" name="accion" value="eliminar">Eliminar</button>
-                    <button type="button" id="btnEditar" onclick="editarPelicula()">Editar</button>
-                    <button type="submit" id="btnGuardar" name="accion" value="guardar">Guardar</button>
-                    <button type="button" id="btnCancelar" onclick="cancelarAccion(event)">Cancelar</button>
+                    <button type="submit" id="btnAgregar" name="accion" value="agregar"><i class="fa-solid fa-plus"></i> Agregar</button>
+                    <button type="submit" id="btnEliminar" name="accion" value="eliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
+                    <button type="button" id="btnEditar" onclick="editarPelicula()"><i class="fa-solid fa-pen"></i> Editar</button>
+                    <button type="submit" id="btnGuardar" name="accion" value="guardar"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                    <button type="button" id="btnCancelar" onclick="cancelarAccion(event)"><i class="fa-solid fa-xmark"></i> Cancelar</button>
                 </div>
             </form>
         </div>
@@ -240,12 +291,12 @@
         <table class="peliculas-table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Género</th>
-                    <th>Stock</th>
-                    <th>Precio</th>
-                    <th>Acción</th>
+                    <th><i class="fa-solid fa-hashtag"></i> ID</th>
+                    <th><i class="fa-solid fa-film"></i> Título</th>
+                    <th><i class="fa-solid fa-tags"></i> Género</th>
+                    <th><i class="fa-solid fa-boxes-stacked"></i> Stock</th>
+                    <th><i class="fa-solid fa-money-bill-wave"></i> Precio</th>
+                    <th><i class="fa-solid fa-hand-pointer"></i> Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -262,7 +313,7 @@
                         <button type="button"
                             class="btn-seleccionar"
                             onclick="seleccionarPelicula(this.parentElement.parentElement); event.stopPropagation();">
-                            Seleccionar
+                            <i class="fa-solid fa-hand-pointer"></i> Seleccionar
                         </button>
                     </td>
                 </tr>

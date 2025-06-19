@@ -44,25 +44,25 @@ public class ClientesController {
                 }
                 try {
                     clientesRepo.save(cliente);
-                    redirectAttrs.addFlashAttribute("mensajeExito", "Cliente agregado correctamente.");
+                    redirectAttrs.addFlashAttribute("mensajeExito", "Cliente agregado");
                 } catch (Exception e) {
-                    redirectAttrs.addFlashAttribute("mensajeError", "Ocurrió un error al agregar el cliente.");
+                    redirectAttrs.addFlashAttribute("mensajeError", "No se pudo  agregar al cliente.");
                 }
             }
         } else if ("eliminar".equals(accion)) {
             if (cliente.getId_cliente() != null) {
                 try {
                     clientesRepo.deleteById(cliente.getId_cliente());
-                    redirectAttrs.addFlashAttribute("mensajeExito", "Cliente eliminado correctamente.");
+                    redirectAttrs.addFlashAttribute("mensajeExito", "Cliente eliminado");
                 } catch (Exception e) {
-                    redirectAttrs.addFlashAttribute("mensajeError", "No se puede eliminar el cliente porque tiene alquileres registrados.");
+                    redirectAttrs.addFlashAttribute("mensajeError", "No se puede eliminar. Tiene alquileres registrados.");
                 }
             }
         } else if ("editar".equals(accion) || "guardar".equals(accion)) {
             if (cliente.getId_cliente() != null) {
                 try {
                     clientesRepo.save(cliente);
-                    redirectAttrs.addFlashAttribute("mensajeExito", "Cliente actualizado correctamente.");
+                    redirectAttrs.addFlashAttribute("mensajeExito", "Datos actualizados");
                 } catch (Exception e) {
                     redirectAttrs.addFlashAttribute("mensajeError", "Ocurrió un error al actualizar el cliente.");
                 }
