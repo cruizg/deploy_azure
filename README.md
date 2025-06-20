@@ -34,7 +34,6 @@ Proyecto de ejemplo para la gestión de alquileres y devoluciones de películas,
 
    - Actualiza el archivo `src/main/resources/application.properties` con tus credenciales de MySQL:
      ```
-     spring.datasource.url=jdbc:mysql://localhost:3306/blockbuster?useSSL=false&serverTimezone=UTC
      spring.datasource.username=tu_usuario
      spring.datasource.password=tu_contraseña
      ```
@@ -128,4 +127,3 @@ evaluacionT2_LP2
 
 ---
 
-**¡Gracias por probar Blockbuster Fake!**
