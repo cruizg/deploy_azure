@@ -35,6 +35,17 @@ public class Alquileres {
     @Column(nullable = false, length = 10)
     private EstadoAlquiler estado;
 
+    @OneToMany(mappedBy = "alquiler", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private java.util.Set<Detalle_alquiler> detalles = new java.util.HashSet<>();
+
+    public Alquileres(Long id_alquiler, LocalDate fecha, Clientes cliente, Double total, EstadoAlquiler estado) {
+        this.id_alquiler = id_alquiler;
+        this.fecha = fecha;
+        this.cliente = cliente;
+        this.total = total;
+        this.estado = estado;
+    }
+
     public enum EstadoAlquiler {
         Activo, Devuelto, Retrasado
     }

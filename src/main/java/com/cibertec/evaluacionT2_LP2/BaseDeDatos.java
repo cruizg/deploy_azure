@@ -73,8 +73,8 @@ public class BaseDeDatos implements CommandLineRunner {
                 pausar(sc);
 
                 Alquileres a1 = alquileresRepo.save(new Alquileres(null, LocalDate.now(), c1, 25.0, Alquileres.EstadoAlquiler.Activo));
-                Alquileres a2 = alquileresRepo.save(new Alquileres(null, LocalDate.now(), c3, 40.0, Alquileres.EstadoAlquiler.Devuelto));
-                Alquileres a3 = alquileresRepo.save(new Alquileres(null, LocalDate.now(), c1, 15.0, Alquileres.EstadoAlquiler.Retrasado));
+                Alquileres a2 = alquileresRepo.save(new Alquileres(null, LocalDate.now(), c2, 40.0, Alquileres.EstadoAlquiler.Devuelto));
+                Alquileres a3 = alquileresRepo.save(new Alquileres(null, LocalDate.now(), c3, 15.0, Alquileres.EstadoAlquiler.Retrasado));
                 System.out.println("\nAlquileres creados:");
                 System.out.println(a1);
                 System.out.println(a2);
@@ -83,8 +83,8 @@ public class BaseDeDatos implements CommandLineRunner {
                 pausar(sc);
 
                 Detalle_alquiler d1 = detalleRepo.save(new Detalle_alquiler(a1, p1, 2));
-                Detalle_alquiler d2 = detalleRepo.save(new Detalle_alquiler(a2, p3, 1));
-                Detalle_alquiler d3 = detalleRepo.save(new Detalle_alquiler(a3, p1, 1));
+                Detalle_alquiler d2 = detalleRepo.save(new Detalle_alquiler(a2, p2, 1));
+                Detalle_alquiler d3 = detalleRepo.save(new Detalle_alquiler(a3, p3, 1));
                 System.out.println("\nDetalles de alquiler creados:");
                 System.out.println(d1);
                 System.out.println(d2);

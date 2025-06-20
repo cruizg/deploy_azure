@@ -33,4 +33,7 @@ public interface Detalle_alquilerRepository extends JpaRepository<Detalle_alquil
 
     // Contar detalles por alquiler
     long countByAlquiler(Alquileres alquiler);
+
+    // Buscar todos los detalles por alquiler
+    List<Detalle_alquiler> findByAlquiler(Alquileres alquiler);
 }

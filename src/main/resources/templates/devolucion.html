@@ -21,7 +21,7 @@
             padding: 36px 36px 28px 36px;
             border-radius: 22px;
             box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
-            max-width: 700px; /* Más ancho */
+            max-width: 700px; 
             margin: 0 auto 30px auto;
             border: 1.5px solid #3a3a7a;
         }
@@ -29,12 +29,12 @@
             text-align:center;
             margin-bottom: 18px;
             letter-spacing: 1px;
-            color: #ffe082; /* Amarillo menos encendido */
+            color: #ffe082; 
             text-shadow: 1px 1px 8px #000;
         }
         .form-section label {
             font-weight: 600;
-            color: #ffe082; /* Amarillo menos encendido */
+            color: #ffe082; 
             margin-bottom: 4px;
             display: block;
         }
@@ -42,7 +42,7 @@
             width: 100%;
             padding: 12px;
             margin: 8px 0 22px 0;
-            border: 2px solid #ffe082; /* Amarillo menos encendido */
+            border: 2px solid #ffe082; 
             border-radius: 10px;
             background: #23235b;
             color: #fff;
@@ -100,7 +100,6 @@
         }
     </style>
     <script>
-        // Recarga películas alquiladas cuando cambia el cliente
         function recargarPeliculas() {
             var clienteId = document.getElementById('cliente').value;
             window.location.href = '/devoluciones/registrar?clienteId=' + clienteId;
@@ -118,7 +117,9 @@
                 <label for="cliente"><i class="fa-solid fa-user"></i> Cliente con alquiler activo/retrasado:</label>
                 <select id="cliente" th:field="*{clienteId}" required onchange="recargarPeliculas()">
                     <option value="" disabled th:selected="*{clienteId} == null or *{clienteId} == ''">Seleccione un cliente</option>
+                    <option value="0" th:selected="*{clienteId} == 0">Seleccione un cliente</option>
                     <option th:each="c : ${clientesActivos}" th:value="${c.id_cliente}" th:text="${c.nombre}"></option>
+                </select>
                 </select>
 
                 <label for="pelicula"><i class="fa-solid fa-film"></i> Película alquilada:</label>

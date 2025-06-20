@@ -120,29 +120,43 @@
         <div th:if="${mensajeError}" class="message-error" th:text="${mensajeError}"></div>
 
         <table class="alquileres-table">
-            <thead>
-                <tr>
-                    <th><i class="fa-solid fa-hashtag"></i> ID</th>
-                    <th><i class="fa-solid fa-user"></i> Cliente</th>
-                    <th><i class="fa-solid fa-calendar-days"></i> Fecha</th>
-                    <th><i class="fa-solid fa-film"></i> Película</th>
-                    <th><i class="fa-solid fa-arrow-up-1-9"></i> Cantidad</th>
-                    <th><i class="fa-solid fa-money-bill-wave"></i> Total</th>
-                    <th><i class="fa-solid fa-circle-info"></i> Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="detalle : ${detalles}">
-                    <td th:text="${detalle.alquiler.id_alquiler}">1</td>
-                    <td th:text="${detalle.alquiler.cliente.nombre}">Juan Pérez</td>
-                    <td th:text="${detalle.alquiler.fecha}">2025-06-01</td>
-                    <td th:text="${detalle.pelicula.titulo}">Matrix</td>
-                    <td th:text="${detalle.cantidad}">2</td>
-                    <td th:text="${detalle.alquiler.total}">30.00</td>
-                    <td th:text="${detalle.alquiler.estado}">Activo</td>
-                </tr>
-            </tbody>
-        </table>
+    <thead>
+        <tr>
+            <th><i class="fa-solid fa-hashtag"></i> ID</th>
+            <th><i class="fa-solid fa-user"></i> Cliente</th>
+            <th><i class="fa-solid fa-calendar-days"></i> Fecha</th>
+            <th><i class="fa-solid fa-film"></i> Película(s)</th>
+            <th><i class="fa-solid fa-arrow-up-1-9"></i> Cantidad</th>
+            <th><i class="fa-solid fa-money-bill-wave"></i> Total</th>
+            <th><i class="fa-solid fa-circle-info"></i> Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="alquiler : ${alquileres}">
+            <td th:text="${alquiler.id_alquiler}">1</td>
+            <td th:text="${alquiler.cliente.nombre}">Juan Pérez</td>
+            <td th:text="${alquiler.fecha}">2025-06-01</td>
+            <td>
+                <ul>
+                    <li th:each="detalle : ${alquiler.detalles}"
+                        th:text="${detalle.pelicula.titulo} + ' (x' + ${detalle.cantidad} + ')'"
+                        th:if="${alquiler.detalles.size() > 0}"></li>
+                    <li th:if="${alquiler.detalles.size() == 0}">Sin películas</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="detalle : ${alquiler.detalles}"
+                        th:text="${detalle.cantidad}"
+                        th:if="${alquiler.detalles.size() > 0}"></li>
+                    <li th:if="${alquiler.detalles.size() == 0}">-</li>
+                </ul>
+            </td>
+            <td th:text="${alquiler.total}">30.00</td>
+            <td th:text="${alquiler.estado}">Activo</td>
+        </tr>
+    </tbody>
+</table>
     </div>
 </body>
 </html>
