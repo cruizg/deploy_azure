@@ -98,7 +98,7 @@ evaluacionT2_LP2
 │                   └── evaluacionT2_LP2
 │                       EvaluacionT2Lp2ApplicationTests.java
 ```
-5. **Capturas de Pantalla:**
+## Capturas de Pantalla
 
    Registro de Clientes
    ![image](https://github.com/user-attachments/assets/613e088a-8e32-4e23-9768-c3082c9723db)
