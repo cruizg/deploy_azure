@@ -2,14 +2,26 @@
 
 Proyecto de ejemplo para la gestión de alquileres y devoluciones de películas, desarrollado con **Spring Boot**, **Thymeleaf** y **MySQL**.
 
+
+
+## Pantallla de Inicio
+
+![Pantalla de Inicio](https://github.com/user-attachments/assets/5e17add5-96da-4db4-ae10-7c33c3f07e44)
+
+## Descripción
+
+Este proyecto permite registrar clientes, películas, alquileres y devoluciones, gestionando el stock de películas y el historial de transacciones. Incluye validaciones, filtros y una interfaz moderna basada en **Thymeleaf**.
+
 ## Características
 
-- Registro de alquileres de películas por cliente
-- Control de stock de películas
-- Registro de devoluciones
-- Listado y filtrado de alquileres y clientes
-- Validaciones de negocio (máximo 2 alquileres activos/retrasados por cliente, stock disponible, etc.)
-- Interfaz web amigable con Thymeleaf
+- Registro, edición y eliminación de clientes.
+- Registro y gestión de películas.
+- Registro de alquileres con control de stock.
+- Registro de devoluciones parciales y totales.
+- Listado y filtrado de alquileres y devoluciones.
+- Validaciones de negocio (máximo de alquileres activos/retrasados por cliente, stock disponible, etc).
+- Mensajes de éxito y error en la interfaz.
+- Interfaz web amigable y moderna.
 
 ## Tecnologías utilizadas
 
@@ -25,8 +37,8 @@ Proyecto de ejemplo para la gestión de alquileres y devoluciones de películas,
 
 1. **Clona el repositorio:**
    ```bash
-   git clone [URL_DE_TU_REPOSITORIO]
-   cd [NOMBRE_DEL_PROYECTO]
+   git clone [https://github.com/gabrielamapri/evaluacionT2_LP2]
+   cd [evaluacionT2_LP2]
    ```
 
 2. **Configura la base de datos MySQL:**
@@ -47,25 +59,12 @@ Proyecto de ejemplo para la gestión de alquileres y devoluciones de películas,
 4. **Accede a la aplicación:**
    - Abre tu navegador en [http://localhost:8080/inicio](http://localhost:8080/inicio)
 
-## Estructura del proyecto
+## Estructura general del proyecto
 
 ```text
 evaluacionT2_LP2
-│   .gitattributes
-│   .gitignore
-│   estructura.txt
-│   HELP.md
-│   mvnw
-│   mvnw.cmd
-│   pom.xml
-│   README.md
-│
-├── .mvn
-│   └── wrapper
-│       └── maven-wrapper.properties
-│
-├── .vscode
-│   └── launch.json
+│   [pom.xml]
+│   [README.md]
 │
 ├── src
 │   ├── main
@@ -73,35 +72,17 @@ evaluacionT2_LP2
 │   │   │   └── com
 │   │   │       └── cibertec
 │   │   │           └── evaluacionT2_LP2
-│   │   │               │   BaseDeDatos.java
-│   │   │               │   EvaluacionT2Lp2Application.java
-│   │   │               │
 │   │   │               ├── controller
-│   │   │               │   AlquileresController.java
-│   │   │               │   ClientesController.java
-│   │   │               │   Detalle_alquilerController.java
-│   │   │               │   DevolucionController.java
-│   │   │               │   HomeController.java
-│   │   │               │   PeliculasController.java
-│   │   │               │
 │   │   │               ├── entity
-│   │   │               │   Alquileres.java
-│   │   │               │   Clientes.java
-│   │   │               │   Detalle_alquiler.java
-│   │   │               │   Peliculas.java
-│   │   │               │
-│   │   │               └── repository
-│   │   │                   AlquileresRepository.java
-│   │   │                   ClientesRepository.java
-│   │   │                   Detalle_alquilerRepository.java
-│   │   │                   PeliculasRepository.java
-│   │   │
+│   │   │               ├── repository
+│   │   │               └── service
 │   │   └── resources
 │   │       │   application.properties
-│   │       │
 │   │       ├── static
-│   │       │   movietime.jpg
-│   │       │
+│   │       │   slide1.jpg
+│   │       │   slide2.jpg
+│   │       │   slide3.jpg
+│   │       │   slide4.jpg
 │   │       └── templates
 │   │           clientes.html
 │   │           devolucion.html
@@ -110,17 +91,30 @@ evaluacionT2_LP2
 │   │           peliculas.html
 │   │           registrar_alquiler.html
 │   │           sidebar.html
-│   │
 │   └── test
 │       └── java
 │           └── com
 │               └── cibertec
 │                   └── evaluacionT2_LP2
 │                       EvaluacionT2Lp2ApplicationTests.java
-│
-└── target
-    └── (archivos y carpetas generados por Maven)
 ```
+5. **Capturas de Pantalla:**
+
+   Registro de Clientes
+   ![image](https://github.com/user-attachments/assets/613e088a-8e32-4e23-9768-c3082c9723db)
+
+   Registro de Películas
+   ![image](https://github.com/user-attachments/assets/7f53c891-7694-49a6-8ee5-2808346ce6c3)
+
+   Registro de Alquiler
+   ![image](https://github.com/user-attachments/assets/9b07e8b7-7994-421b-9d14-c662768b3845)
+
+   Registro de Devolución
+   ![image](https://github.com/user-attachments/assets/978931b7-ba19-4b10-babc-bacc4cac2f49)
+
+   Listado de Alquileres
+   ![image](https://github.com/user-attachments/assets/3ad964b2-2bf0-4d58-ae10-afc3f30b3d10)
+
 
 ## Autor
 
